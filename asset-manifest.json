@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/juz-amma-quiz/static/css/main.591789f7.css",
+    "main.js": "/juz-amma-quiz/static/js/main.40ee4bad.js",
+    "index.html": "/juz-amma-quiz/index.html",
+    "main.591789f7.css.map": "/juz-amma-quiz/static/css/main.591789f7.css.map",
+    "main.40ee4bad.js.map": "/juz-amma-quiz/static/js/main.40ee4bad.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.591789f7.css",
+    "static/js/main.40ee4bad.js"
+  ]
+}
