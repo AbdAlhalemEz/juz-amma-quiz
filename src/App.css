@@ -1,0 +1,110 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to top left, #dbeafe, #f0fdf4);
+  padding: 20px;
+  margin: 0;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #1e3a8a;
+}
+
+.surah-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.surah-btn {
+  padding: 12px 20px;
+  background-color: #93c5fd;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #1e40af;
+  transition: 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.surah-btn:hover {
+  background-color: #60a5fa;
+}
+
+.quiz-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.verses-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.verse-btn {
+  background-color: #fcd34d;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  max-width: 100%;
+  min-width: 200px;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px #888;
+}
+
+.verse-btn:hover {
+  background-color: #fde68a;
+}
+
+.selected-box {
+  border-top: 2px dashed #1e3a8a;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+
+.selected-verse {
+  padding: 10px;
+  margin: 5px auto;
+  background-color: #bbf7d0;
+  border-radius: 6px;
+  max-width: 700px;
+}
+
+.back-btn {
+  display: block;
+  margin: 30px auto 10px;
+  text-align: center;
+  font-size: 16px;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.verse-btn.error {
+  animation: shake 0.3s;
+  background-color: #fecaca;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+.success-msg {
+  background-color: #bbf7d0;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  color: #166534;
+  font-weight: bold;
+  margin-top: 20px;
+}
