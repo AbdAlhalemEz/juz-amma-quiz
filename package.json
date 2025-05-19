@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "https://AbdAlhalemEz.github.io/juz-amma-quiz",
   "dependencies": {
+    "@capacitor/android": "^7.2.0",
+    "@capacitor/cli": "^7.2.0",
+    "@capacitor/core": "^7.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",

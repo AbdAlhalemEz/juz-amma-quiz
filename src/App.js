@@ -1,10 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { HashRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { HashRouter as Router, Routes, Route, Link, useParams, UNSAFE_NavigationContext } from "react-router-dom";
 import { juzAmma } from "./juz_amma";
 import "./App.css";
 
-const correctSound = new Audio("/sounds/correct.mp3");
-const wrongSound = new Audio("/sounds/wrong.mp3");
+const correctSound = new Audio(process.env.PUBLIC_URL + "/sounds/correct.mp3");
+const wrongSound = new Audio(process.env.PUBLIC_URL + "/sounds/wrong.mp3");
+
+function useBlocker(blockCondition) {
+  const navigator = useContext(UNSAFE_NavigationContext).navigator;
+
+  useEffect(() => {
+    if (!blockCondition) return;
+    const originalPush = navigator.push;
+    navigator.push = (...args) => {
+      if (window.confirm("هل أنت متأكد أنك تريد الخروج قبل إنهاء ترتيب السورة؟")) {
+        originalPush.apply(navigator, args);
+      }
+    };
+    return () => {
+      navigator.push = originalPush;
+    };
+  }, [blockCondition, navigator]);
+}
 
 function SurahQuiz() {
   const { surahName } = useParams();
@@ -23,6 +40,21 @@ function SurahQuiz() {
     setErrorVerse(null);
   }, [surahName]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (!completed) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [completed]);
+
+  useBlocker(!completed);
+
   const handleClick = (verse) => {
     if (completed || selected.includes(verse)) return;
     const next = [...selected, verse];
@@ -30,14 +62,14 @@ function SurahQuiz() {
 
     if (!correct) {
       setErrorVerse(verse);
-      wrongSound.play(); // 🔴 صوت خطأ
+      wrongSound.play();
       setTimeout(() => setErrorVerse(null), 800);
       return;
     }
 
     setSelected(next);
     if (next.length === verses.length) {
-      correctSound.play(); // ✅ صوت نجاح
+      correctSound.play();
       setCompleted(true);
       const completed = JSON.parse(localStorage.getItem("completedSurahs") || "[]");
       if (!completed.includes(surahName)) {
@@ -52,17 +84,18 @@ function SurahQuiz() {
       <h2>{surahName}</h2>
       <div className="verses-grid">
         {shuffledVerses.map((v, i) => (
-          <button
-            key={i}
-            className={
-              "verse-btn" +
-              (selected.includes(v) ? " selected" : "") +
-              (errorVerse === v ? " error" : "")
-            }
-            onClick={() => handleClick(v)}
-          >
-            {v}
-          </button>
+          selected.includes(v) ? null : (
+            <button
+              key={i}
+              className={
+                "verse-btn" +
+                (errorVerse === v ? " error" : "")
+              }
+              onClick={() => handleClick(v)}
+            >
+              {v}
+            </button>
+          )
         ))}
       </div>
       <div className="selected-box">
@@ -73,7 +106,7 @@ function SurahQuiz() {
         ))}
       </div>
       {completed && <div className="success-msg">🎉 أحسنت! انتهيت من ترتيب السورة بنجاح.</div>}
-      <Link to="/" className="back-btn">⬅️ رجوع</Link>
+      {completed && <Link to="/" className="back-btn">⬅️ رجوع</Link>}
     </div>
   );
 }
