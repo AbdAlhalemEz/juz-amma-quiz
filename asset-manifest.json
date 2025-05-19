@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/juz-amma-quiz/static/css/main.7770540c.css",
-    "main.js": "/juz-amma-quiz/static/js/main.ff30f4dd.js",
+    "main.js": "/juz-amma-quiz/static/js/main.fbdb96d5.js",
     "index.html": "/juz-amma-quiz/index.html",
     "main.7770540c.css.map": "/juz-amma-quiz/static/css/main.7770540c.css.map",
-    "main.ff30f4dd.js.map": "/juz-amma-quiz/static/js/main.ff30f4dd.js.map"
+    "main.fbdb96d5.js.map": "/juz-amma-quiz/static/js/main.fbdb96d5.js.map"
   },
   "entrypoints": [
     "static/css/main.7770540c.css",
-    "static/js/main.ff30f4dd.js"
+    "static/js/main.fbdb96d5.js"
   ]
 }
